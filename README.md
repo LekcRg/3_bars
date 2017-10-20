@@ -19,7 +19,7 @@
 
 ```bash
 
-python bars.py <path_to_file> closest_bar <latitude> <longitude> # possibly requires call of python3 executive 
+python bars.py <path_to_file> closest_bar -l1 <latitude> -l2 <longitude> # possibly requires call of python3 executive
 Самый близкий бар
 Название: ТД ГУМ Кафе фестиваль
 Адрес: Красная площадь, дом 3
