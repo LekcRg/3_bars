@@ -28,8 +28,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("data", help="path to json file")
     parser.add_argument("get_function", help="what will need do", type=str)
-    parser.add_argument("-l1", "--longitude", help="longitude", required=False, type=float)
-    parser.add_argument("-l2", "--latitude", help="latitude", required=False, type=float)
+    parser.add_argument("-l1", "--longitude", help="longitude", required=False,
+                        type=float)
+    parser.add_argument("-l2", "--latitude", help="latitude", required=False,
+                        type=float)
     args = parser.parse_args()
     bars_info = load_json(args.data)['features']
     if args.get_function == "biggest_bar":
