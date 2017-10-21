@@ -28,9 +28,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("data", help="path to json file")
     parser.add_argument("get_function", help="what will need do", type=str)
-    parser.add_argument("-l1", "--longitude", help="longitude", required=False,
-                        type=float)
-    parser.add_argument("-l2", "--latitude", help="latitude", required=False,
+    parser.add_argument("-lon", "--longitude", help="longitude",
+                        required=False, type=float)
+    parser.add_argument("-lat", "--latitude", help="latitude", required=False,
                         type=float)
     args = parser.parse_args()
     bars_info = load_json(args.data)['features']
@@ -47,12 +47,16 @@ if __name__ == '__main__':
                       address=get_smallest_bar(bars_info)
                       ['properties']['Attributes']['Address']))
     if args.get_function == "closest_bar":
-        print("Самый близкий бар\nНазвание: {name}\nАдрес: {address}\n"
-              .format(name=get_closest_bar(bars_info, args.longitude,
-                                           args.latitude)['properties']
-                                                         ['Attributes']
-                                                         ['Name'],
-                      address=get_closest_bar(bars_info, args.longitude,
-                                              args.latitude)['properties']
-                                                            ['Attributes']
-                                                            ['Address']))
+        try:
+            print("Самый близкий бар\nНазвание: {name}\nАдрес: {address}\n"
+                  .format(name=get_closest_bar(bars_info, args.longitude,
+                                               args.latitude)['properties']
+                                                             ['Attributes']
+                                                             ['Name'],
+                          address=get_closest_bar(bars_info, args.longitude,
+                                                  args.latitude)['properties']
+                                                                ['Attributes']
+                                                                ['Address']))
+        except TypeError:
+            print("Введите широту и долготу после вызова функции:\n"
+                  "-lon <longitude> -lat <latitude>")
