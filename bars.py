@@ -40,13 +40,13 @@ if __name__ == '__main__':
                       ['properties']['Attributes']['Name'],
                       address=get_biggest_bar(bars_info)['properties']
                       ['Attributes']['Address']))
-    if args.get_function == "smallest_bar":
+    elif args.get_function == "smallest_bar":
         print("Самый маленький бар\nНазвание: {name}\nАдрес: {address}\n"
               .format(name=get_smallest_bar(bars_info)
                       ['properties']['Attributes']['Name'],
                       address=get_smallest_bar(bars_info)
                       ['properties']['Attributes']['Address']))
-    if args.get_function == "closest_bar" and args.latitude is not None\
+    elif args.get_function == "closest_bar" and args.latitude is not None\
             and args.longitude is not None:
         print("Самый близкий бар\nНазвание: {name}\nАдрес: {address}\n"
               .format(name=get_closest_bar(bars_info, args.longitude,
