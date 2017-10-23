@@ -46,17 +46,16 @@ if __name__ == '__main__':
                       ['properties']['Attributes']['Name'],
                       address=get_smallest_bar(bars_info)
                       ['properties']['Attributes']['Address']))
-    if args.get_function == "closest_bar":
-        try:
-            print("Самый близкий бар\nНазвание: {name}\nАдрес: {address}\n"
-                  .format(name=get_closest_bar(bars_info, args.longitude,
-                                               args.latitude)['properties']
-                                                             ['Attributes']
-                                                             ['Name'],
-                          address=get_closest_bar(bars_info, args.longitude,
-                                                  args.latitude)['properties']
-                                                                ['Attributes']
-                                                                ['Address']))
-        except TypeError:
-            print("Введите широту и долготу после вызова функции:\n"
-                  "-lon <longitude> -lat <latitude>")
+    if args.get_function == "closest_bar" and args.latitude is not None\
+            and args.longitude is not None:
+        print("Самый близкий бар\nНазвание: {name}\nАдрес: {address}\n"
+              .format(name=get_closest_bar(bars_info, args.longitude,
+                                           args.latitude)['properties']
+                                                         ['Attributes']
+                                                         ['Name'],
+                      address=get_closest_bar(bars_info, args.longitude,
+                                              args.latitude)['properties']
+                                                            ['Attributes']
+                                                            ['Address']))
+    else:
+        parser.error("Введите широту и долготу\n")
