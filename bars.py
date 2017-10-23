@@ -24,14 +24,19 @@ def get_closest_bar(json_data, longitude, latitude):
         (bar['geometry']['coordinates'][1] - longitude) ** 2))
 
 
+def add_parser():
+    new_parser = argparse.ArgumentParser()
+    new_parser.add_argument("data", help="path to json file")
+    new_parser.add_argument("get_function", help="what will need do", type=str)
+    new_parser.add_argument("-lon", "--longitude", help="longitude",
+                            required=False, type=float)
+    new_parser.add_argument("-lat", "--latitude", help="latitude",
+                            required=False, type=float)
+    return new_parser
+
+
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument("data", help="path to json file")
-    parser.add_argument("get_function", help="what will need do", type=str)
-    parser.add_argument("-lon", "--longitude", help="longitude",
-                        required=False, type=float)
-    parser.add_argument("-lat", "--latitude", help="latitude", required=False,
-                        type=float)
+    parser = add_parser()
     args = parser.parse_args()
     bars_info = load_json(args.data)['features']
     if args.get_function == "biggest_bar":
@@ -57,5 +62,6 @@ if __name__ == '__main__':
                                               args.latitude)['properties']
                                                             ['Attributes']
                                                             ['Address']))
-    else:
+    elif args.get_function == "closest_bar" and args.latitude is None\
+            and args.longitude is None:
         parser.error("Введите широту и долготу\n")
